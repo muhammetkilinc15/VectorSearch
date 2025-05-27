@@ -94,7 +94,7 @@ SELECT
   ```bash
      dotnet add package Microsoft.SemanticKernel.Connectors.Ollama --version 1.35.0-alpha
   ```
--  Entity Framework Core kütüphanelerini projeye dahil edin
+## 1.  Entity Framework Core kütüphanelerini Kurulumu
  ```bash
     dotnet add package Microsoft.EntityFrameworkCore
     dotnet add package Microsoft.EntityFrameworkCore.SqlServer
