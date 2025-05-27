@@ -1,0 +1,153 @@
+[
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.EmbeddingController",
+    "Method": "GenerateEmbedding",
+    "RelativePath": "api/Embedding/generate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "VectorSearchWithMssql.Dtos.EmbeddingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "VectorSearchWithMssql.Dtos.EmbeddingResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "VectorSearchWithMssql.Dtos.ErrorResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "VectorSearchWithMssql.Dtos.ErrorResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.EmbeddingController",
+    "Method": "GenerateBatchEmbeddings",
+    "RelativePath": "api/Embedding/generate-batch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "VectorSearchWithMssql.Dtos.BatchEmbeddingRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "VectorSearchWithMssql.Dtos.BatchEmbeddingResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "VectorSearchWithMssql.Dtos.ErrorResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "VectorSearchWithMssql.Dtos.ErrorResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 500
+      }
+    ]
+  },
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.ProductController",
+    "Method": "AddProduct",
+    "RelativePath": "api/Product/add-product",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "product",
+        "Type": "VectorSearchWithMssql.Dtos.CreateProductDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.ProductController",
+    "Method": "AddProducts",
+    "RelativePath": "api/Product/add-products",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "products",
+        "Type": "System.Collections.Generic.List\u00601[[VectorSearchWithMssql.Dtos.CreateProductDto, VectorSearchWithMssql, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.ProductController",
+    "Method": "GetProducts",
+    "RelativePath": "api/Product/get-products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VectorSearchWithMssql.Controllers.ProductController",
+    "Method": "GetProductWithCosineSimilarity",
+    "RelativePath": "api/Product/get-products-by-similarity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "text",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "similaritType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,0 +1,6 @@
+@VectorSearchWithMssql_HostAddress = http://localhost:5207
+
+GET {{VectorSearchWithMssql_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
