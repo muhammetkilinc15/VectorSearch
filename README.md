@@ -61,11 +61,23 @@ SELECT TOP 5
 FROM Products
 ORDER BY SimilarityScore DESC;
 ```
-Örnekler : 
+## Microsoft Örneği 
+```sql
+DECLARE @v1 VECTOR(2) = '[1,1]';
+DECLARE @v2 VECTOR(2) = '[-1,-1]';
+
+SELECT 
+    VECTOR_DISTANCE('euclidean', @v1, @v2) AS euclidean,
+    VECTOR_DISTANCE('cosine', @v1, @v2) AS cosine,
+    VECTOR_DISTANCE('dot', @v1, @v2) AS negative_dot_product;
+```
+
+
+## Projeye ait ekran görüntüleri : 
 
 ![SimilarityPng2](https://github.com/user-attachments/assets/4e9316ab-f7a8-407e-b7ed-3716e286f7d3)
 
 ![SimilarityPng](https://github.com/user-attachments/assets/8d9286bf-2330-4065-b9a3-9c114eb41bd4)
 
 
-NOT : EF Core tarafında tam destek olmadığı için benzerlik kıyaslaması uygulama tarafında yapılmıştır
+**NOT !!!** : EF Core tarafında tam destek olmadığı için benzerlik kıyaslaması uygulama tarafında yapılmıştır
