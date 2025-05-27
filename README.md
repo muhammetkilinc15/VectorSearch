@@ -83,11 +83,7 @@ SELECT
 **NOT !!!** : EF Core tarafında tam destek olmadığı için benzerlik kıyaslaması uygulama tarafında yapılmıştır
 
 # Kullanım Rehberi
-
-Bu proje, SQL Server 2025'in vector arama özelliklerini kullanarak AI destekli arama senaryolarını göstermektedir. Aşağıda, temel kurulum ve yapılandırma adımları yer almaktadır.
-
----
-
+--- 
 ## 1. Semantic Kernel ve Ollama Connector Kurulumu
 
 -  [Semantic Kernel](https://aka.ms/semantic-kernel) kütüphanesini projenize dahil edin:
