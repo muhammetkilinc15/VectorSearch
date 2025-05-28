@@ -72,14 +72,6 @@ SELECT
     VECTOR_DISTANCE('dot', @v1, @v2) AS negative_dot_product;
 ```
 
-
-## Projeye ait ekran görüntüleri : 
-
-![SimilarityPng2](https://github.com/user-attachments/assets/4e9316ab-f7a8-407e-b7ed-3716e286f7d3)
-
-![SimilarityPng](https://github.com/user-attachments/assets/8d9286bf-2330-4065-b9a3-9c114eb41bd4)
-
-
 # Kullanım Rehberi
 --- 
 ## 1. Semantic Kernel ve Ollama Connector Kurulumu
@@ -109,6 +101,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ));
 
 ```
+
+## Projeye ait ekran görüntüleri : 
+
+![SimilarityPng2](https://github.com/user-attachments/assets/4e9316ab-f7a8-407e-b7ed-3716e286f7d3)
+
+![SimilarityPng](https://github.com/user-attachments/assets/8d9286bf-2330-4065-b9a3-9c114eb41bd4)
+
+
 ## Özet 
 
 Vector arama, SQL Server 2025 ile birlikte artık sadece AI modellerinin işi olmaktan çıkıp, doğrudan veritabanı seviyesinde yönetilebilen bir yetenek haline geldi. Bu, AI destekli uygulamaların performansını artırırken karmaşıklığı azaltmak açısından büyük bir adım olduğunu düşünüyorum.
