@@ -80,8 +80,6 @@ SELECT
 ![SimilarityPng](https://github.com/user-attachments/assets/8d9286bf-2330-4065-b9a3-9c114eb41bd4)
 
 
-**NOT !!!** : EF Core tarafında tam destek olmadığı için benzerlik kıyaslaması uygulama tarafında yapılmıştır
-
 # Kullanım Rehberi
 --- 
 ## 1. Semantic Kernel ve Ollama Connector Kurulumu
@@ -99,5 +97,6 @@ SELECT
     dotnet add package Microsoft.EntityFrameworkCore
     dotnet add package Microsoft.EntityFrameworkCore.SqlServer
     dotnet add package Microsoft.EntityFrameworkCore.Tools
+    dotnet add package EFCore.SqlServer.VectorSearch 
 ```
 
