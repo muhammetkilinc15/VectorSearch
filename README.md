@@ -37,47 +37,9 @@ Bu fonksiyonlar doğrudan SQL sorgularında kullanılabilir.
 
 ---
 
-## Örnek SQL Kullanımı
-
-```sql
--- Tablo oluşturma örneği
-CREATE TABLE [dbo].[Products](
-    [Id] INT IDENTITY(1,1) PRIMARY KEY,
-    [Name] NVARCHAR(100),
-    [Description] NVARCHAR(300),
-    [Price] DECIMAL(18, 2),
-    [Category] NVARCHAR(100),
-    [EmbeddingVector] VECTOR(768) -- 768 boyutlu embedding vektörü
-);
-
--- Örnek: En yakın 5 ürünü arama
-DECLARE @queryVector VECTOR(768) = ... -- Sorgu embedding vektörü burada atanmalı
-
-SELECT TOP 5 
-    Id, 
-    Name, 
-    Description, 
-    COSINE_SIMILARITY(EmbeddingVector, @queryVector) AS SimilarityScore
-FROM Products
-ORDER BY SimilarityScore DESC;
-```
-## Microsoft Örneği 
-```sql
-DECLARE @v1 VECTOR(2) = '[1,1]';
-DECLARE @v2 VECTOR(2) = '[-1,-1]';
-
-SELECT 
-    VECTOR_DISTANCE('euclidean', @v1, @v2) AS euclidean,
-    VECTOR_DISTANCE('cosine', @v1, @v2) AS cosine,
-    VECTOR_DISTANCE('dot', @v1, @v2) AS negative_dot_product;
-```
-
 # Kullanım Rehberi
 --- 
 ## 1. Semantic Kernel ve Ollama Connector Kurulumu
-
--  [Semantic Kernel](https://aka.ms/semantic-kernel) kütüphanesini projenize dahil edin:
-  
   ```bash
   dotnet add package Microsoft.SemanticKernel
   ```
@@ -101,6 +63,43 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ));
 
 ```
+
+## Örnek Üzerinde Vector Aramasını Inceleyelim
+
+```sql
+-- Tablo oluşturma örneği
+CREATE TABLE [dbo].[Products](
+    [Id] INT IDENTITY(1,1) PRIMARY KEY,
+    [Name] NVARCHAR(100),
+    [Description] NVARCHAR(300),
+    [Price] DECIMAL(18, 2),
+    [Category] NVARCHAR(100),
+    [EmbeddingVector] VECTOR(768) -- 768 boyutlu embedding vektörü
+);
+
+-- Örnek: En yakın 5 ürünü arama
+DECLARE @queryVector VECTOR(768) = [....]  --> Sorgu embedding vektörü burada atanmalı (Mesela Iphone kelimesinin vectörü )
+
+SELECT TOP 5 
+    Id, 
+    Name, 
+    Description, 
+FROM Products
+ORDER BY VECTOR_DISTANCE('cosine', @queryVector, p.EmbeddingVector);
+```
+
+## Microsoft Örneği 
+```sql
+DECLARE @v1 VECTOR(2) = '[1,1]';
+DECLARE @v2 VECTOR(2) = '[-1,-1]';
+
+SELECT 
+    VECTOR_DISTANCE('euclidean', @v1, @v2) AS euclidean,
+    VECTOR_DISTANCE('cosine', @v1, @v2) AS cosine,
+    VECTOR_DISTANCE('dot', @v1, @v2) AS negative_dot_product;
+```
+
+
 
 ## Projeye ait ekran görüntüleri : 
 
