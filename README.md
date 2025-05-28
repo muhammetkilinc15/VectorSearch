@@ -100,3 +100,17 @@ SELECT
     dotnet add package EFCore.SqlServer.VectorSearch 
 ```
 
+## 3. ApplicationDbContext Kaydı (IoC Container)
+```bash
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.UseVectorSearch()
+    ));
+
+```
+## Özet 
+
+Vector arama, SQL Server 2025 ile birlikte artık sadece AI modellerinin işi olmaktan çıkıp, doğrudan veritabanı seviyesinde yönetilebilen bir yetenek haline geldi. Bu, AI destekli uygulamaların performansını artırırken karmaşıklığı azaltmak açısından büyük bir adım olduğunu düşünüyorum.
+
+
