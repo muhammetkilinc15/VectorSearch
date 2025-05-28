@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj": {}
+    "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj": {
+    "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj",
+        "projectUniqueName": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj",
         "projectName": "VectorSearchWithMssql",
-        "projectPath": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj",
+        "projectPath": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\VectorSearchWithMssql.csproj",
         "packagesPath": "C:\\Users\\Bemu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\obj\\",
+        "outputPath": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "EFCore.SqlServer.VectorSearch": {
+              "target": "Package",
+              "version": "[9.0.0-preview.2, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.5, )"

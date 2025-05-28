@@ -1,11 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Globalization;
 using VectorSearchWithMssql.Context;
 using VectorSearchWithMssql.Dtos;
-using VectorSearchWithMssql.Helper;
 using VectorSearchWithMssql.Models;
 using VectorSearchWithMssql.Services;
 
@@ -89,14 +86,14 @@ namespace VectorSearchWithMssql.Controllers
 
         [HttpGet]
         [Route("get-products-by-similarity")]
-        public async Task<IActionResult> GetProductWithCosineSimilarity(string text, int similaritType, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetProductWithCosineSimilarity(string text, CancellationToken cancellationToken)
         {
             // Creating embedding vector for the input text
             float[] embeddingFloatArray = await _ollamaEmbeddingService.GenerateEmbeddingAsync(text);
 
-            // get all products from the database and their embedding vectors
             var products = await _context.Products
                 .AsNoTracking()
+                .OrderBy(p => EF.Functions.VectorDistance("cosine", p.EmbedingVector, embeddingFloatArray))
                 .Select(x => new
                 {
                     x.Id,
@@ -104,42 +101,11 @@ namespace VectorSearchWithMssql.Controllers
                     x.Description,
                     x.Price,
                     x.Category,
-                    Vector = x.EmbedingVector
                 })
                 .ToListAsync(cancellationToken);
 
-            var closestProduct = products
-                .Select(p => new
-                {
-                    Product = p,
-                    Similarity = similaritType switch
-                    {
-                        1 => SimilartyCalculater.CalculateManhattanDistance(embeddingFloatArray, p.Vector),
-                        2 => SimilartyCalculater.CalculateEuclideanDistance(embeddingFloatArray, p.Vector),
-                        _ => SimilartyCalculater.CalculateCosineSimilarity(embeddingFloatArray, p.Vector)
-                    }
-                })
-                .OrderByDescending(x => x.Similarity);
-
-            var result = new List<dynamic>();
-
-            foreach (var product in closestProduct)
-            {
-                if (product.Similarity > 0.5f)
-                {
-                    result.Add(new
-                    {
-                        product.Product.Id,
-                        product.Product.Name,
-                        product.Product.Description,
-                        product.Product.Price,
-                        product.Product.Category,
-                        SimilarityScore = product.Similarity
-                    });
-                }
-            }
-
-            return Ok(result);
+      
+            return Ok(products);
         }
 
 

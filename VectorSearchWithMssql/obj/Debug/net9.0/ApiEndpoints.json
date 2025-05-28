@@ -141,11 +141,6 @@
         "Name": "text",
         "Type": "System.String",
         "IsRequired": false
-      },
-      {
-        "Name": "similaritType",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []

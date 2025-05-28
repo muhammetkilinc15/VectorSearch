@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\",
+  "WorkspaceRootPath": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F6E5E640-A7F9-405B-9430-DB3189B73075}|VectorSearchWithMssql.csproj|c:\\users\\bemu\\desktop\\vectorsearchwithmssql\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F6E5E640-A7F9-405B-9430-DB3189B73075}|VectorSearchWithMssql.csproj|c:\\users\\bemu\\desktop\\vectorsearch\\vectorsearchwithmssql\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F6E5E640-A7F9-405B-9430-DB3189B73075}|VectorSearchWithMssql.csproj|solutionrelative:controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -60,13 +60,13 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\Controllers\\ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductController.cs",
-              "ToolTip": "C:\\Users\\Bemu\\Desktop\\VectorSearchWithMssql\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\Bemu\\Desktop\\VectorSearch\\VectorSearchWithMssql\\Controllers\\ProductController.cs",
               "RelativeToolTip": "Controllers\\ProductController.cs",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAkwH8AAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T09:36:06.055Z",
+              "WhenOpened": "2025-05-28T23:07:04.488Z",
               "EditorCaption": ""
             }
           ]
