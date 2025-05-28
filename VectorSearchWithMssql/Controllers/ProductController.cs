@@ -102,9 +102,10 @@ namespace VectorSearchWithMssql.Controllers
                     x.Price,
                     x.Category,
                 })
+                .Take(10)
                 .ToListAsync(cancellationToken);
 
-      
+
             return Ok(products);
         }
 

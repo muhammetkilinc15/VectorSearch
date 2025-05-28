@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VectorSearchWithMssql")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e505e51aa41a31f6ac06606462a44b6adc16d499")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbc51d6babc5e63add72ff9d02eca174fceadbb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("VectorSearchWithMssql")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VectorSearchWithMssql")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

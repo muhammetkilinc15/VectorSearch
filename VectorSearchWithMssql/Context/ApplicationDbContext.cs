@@ -12,8 +12,7 @@ namespace VectorSearchWithMssql.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Additional model configurations can go here
-            modelBuilder.Entity<Models.Product>().HasKey(p => p.Id); // Assuming Product has an Id property
+            modelBuilder.Entity<Models.Product>().HasKey(p => p.Id);
             modelBuilder.Entity<Models.Product>().Property(p => p.EmbedingVector).HasColumnType("vector(768)");
             modelBuilder.Entity<Models.Product>().Property(p => p.Name).HasColumnType("nvarchar(100)");
             modelBuilder.Entity<Models.Product>().Property(p => p.Description).HasColumnType("nvarchar(300)");
