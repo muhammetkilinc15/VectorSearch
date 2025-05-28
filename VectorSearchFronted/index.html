@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,148 +15,171 @@
             color: #212529;
             padding-top: 40px;
         }
-        h1, h2 {
+
+        h1,
+        h2 {
             margin-bottom: 30px;
             font-weight: 600;
         }
+
         .product-item {
             border-bottom: 1px solid #dee2e6;
             padding: 12px 0;
         }
+
         .similarity-score {
             font-size: 0.9em;
             color: #6c757d;
         }
+
         textarea {
             resize: vertical;
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1 class="text-center mb-5">Ürün Yönetim Paneli</h1>
+        <h1 class="text-center mb-5">Ürün Yönetim Paneli</h1>
 
-    <!-- Çoklu Ürün Ekleme Formu -->
-    <section class="mb-5">
-        <h2 class="h4 text-center mb-4">Birden Fazla Ürün Ekle (JSON Formatında)</h2>
-        <form id="addProductsForm" novalidate>
-            <div class="mb-3">
-                <label for="productsJson" class="form-label">Ürünler (JSON Array)</label>
-                <textarea id="productsJson" class="form-control" rows="8" placeholder='[{"name":"Ürün1","price":100,"description":"Açıklama","category":"Kategori"}, {...}]' required></textarea>
-                <div class="invalid-feedback">
-                    Lütfen geçerli bir JSON dizi girin.
+        <!-- Çoklu Ürün Ekleme Formu -->
+        <section class="mb-5">
+            <h2 class="h4 text-center mb-4">Birden Fazla Ürün Ekle (JSON Formatında)</h2>
+            <form id="addProductsForm" novalidate>
+                <div class="mb-3">
+                    <label for="productsJson" class="form-label">Ürünler (JSON Array)</label>
+                    <textarea id="productsJson" class="form-control" rows="8"
+                        placeholder='[{"name":"Ürün1","price":100,"description":"Açıklama","category":"Kategori"}, {...}]'
+                        required></textarea>
+                    <div class="invalid-feedback">
+                        Lütfen geçerli bir JSON dizi girin.
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Ürünleri Ekle</button>
-        </form>
-        <p id="batchProductMessage" class="mt-3"></p>
-    </section>
+                <button type="submit" class="btn btn-primary">Ürünleri Ekle</button>
+            </form>
+            <p id="batchProductMessage" class="mt-3"></p>
+        </section>
 
-    <!-- Benzer Ürünleri Ara -->
-    <section class="mb-5">
-        <h2 class="h4 text-center mb-4">Benzer Ürünleri Ara</h2>
-        <div class="row g-3 align-items-end mb-3">
-            <div class="col-md-6">
-                <label for="searchText" class="form-label">Arama Metni</label>
-                <input type="text" id="searchText" class="form-control" placeholder="Arama için metin girin" />
-            </div>
-            <div class="col-md-4">
+        <!-- Benzer Ürünleri Ara -->
+        <section class="mb-5">
+            <h2 class="h4 text-center mb-4">Benzer Ürünleri Ara</h2>
+            <div class="row g-3 align-items-end mb-3">
+                <div class="col-md-6">
+                    <label for="searchText" class="form-label">Arama Metni</label>
+                    <input type="text" id="searchText" class="form-control" placeholder="Arama için metin girin" />
+                </div>
+                <!-- similarityType alanı kaldırılabilir veya sadece görsel olarak bırakılabilir -->
+                <!-- <div class="col-md-4">
                 <label for="similarityType" class="form-label">Benzerlik Türü</label>
                 <select id="similarityType" class="form-select">
                     <option value="0">Cosine Similarity (Varsayılan)</option>
                     <option value="1">Manhattan Distance</option>
                     <option value="2">Euclidean Distance</option>
                 </select>
+            </div> -->
+                <div class="col-md-2 d-grid">
+                    <button id="searchBtn" class="btn btn-success" enterkeyhint="enter">Ara</button>
+                </div>
             </div>
-            <div class="col-md-2 d-grid">
-                <button id="searchBtn" class="btn btn-success">Ara</button>
-            </div>
-        </div>
 
-        <div class="results" id="searchResults"></div>
-    </section>
+            <div class="results" id="searchResults"></div>
+        </section>
 
-</div>
+    </div>
 
-<!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS Bundle (Popper + Bootstrap JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    const apiBase = "https://localhost:7253/api/product";
+    <script>
+        const apiBase = "https://localhost:7253/api/product";
 
-    // Çoklu ürün ekleme
-    document.getElementById('addProductsForm').addEventListener('submit', async e => {
-        e.preventDefault();
-        const messageEl = document.getElementById('batchProductMessage');
-        messageEl.textContent = "";
+        // Çoklu ürün ekleme
+        document.getElementById('addProductsForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const messageEl = document.getElementById('batchProductMessage');
+            messageEl.textContent = "";
 
-        let products;
-        try {
-            products = JSON.parse(e.target.productsJson.value);
-            if (!Array.isArray(products)) throw new Error("JSON bir dizi olmalı.");
-        } catch (err) {
-            messageEl.textContent = "Geçersiz JSON formatı.";
-            return;
-        }
-
-        try {
-            const res = await fetch(`${apiBase}/add-products`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(products)
-            });
-            if(res.ok) {
-                messageEl.textContent = "Ürünler başarıyla eklendi.";
-                e.target.reset();
-            } else {
-                const err = await res.json();
-                messageEl.textContent = "Hata: " + (err.detail || "Bilinmeyen hata");
+            let products;
+            try {
+                products = JSON.parse(e.target.productsJson.value);
+                if (!Array.isArray(products)) throw new Error("JSON bir dizi olmalı.");
+            } catch (err) {
+                messageEl.textContent = "Geçersiz JSON formatı.";
+                return;
             }
-        } catch (error) {
-            messageEl.textContent = "Sunucu bağlantı hatası.";
-        }
-    });
 
-    // Benzer ürünleri ara
-    document.getElementById('searchBtn').addEventListener('click', async () => {
-        const text = document.getElementById('searchText').value.trim();
-        const similarityType = parseInt(document.getElementById('similarityType').value);
-        const container = document.getElementById('searchResults');
-        container.innerHTML = "";
-
-        if (!text) {
-            container.innerHTML = `<div class="alert alert-warning">Arama metni boş olamaz.</div>`;
-            return;
-        }
-
-        container.innerHTML = `<div class="text-center my-3">Aranıyor...</div>`;
-
-        try {
-            // Düzeltildi: 'similaritType' → 'similarityType'
-            const res = await fetch(`${apiBase}/get-products-by-similarity?text=${encodeURIComponent(text)}&similarityType=${similarityType}`);
-            if(res.ok) {
-                const results = await res.json();
-                if(results.length === 0) {
-                    container.innerHTML = `<div class="alert alert-info">Benzer ürün bulunamadı.</div>`;
-                    return;
+            try {
+                const res = await fetch(`${apiBase}/add-products`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(products)
+                });
+                if (res.ok) {
+                    messageEl.textContent = "Ürünler başarıyla eklendi.";
+                    e.target.reset();
+                } else {
+                    const err = await res.json();
+                    messageEl.textContent = "Hata: " + (err.detail || "Bilinmeyen hata");
                 }
-                container.innerHTML = "<ul class='list-unstyled'>" + results.map(p => 
-                    `<li class="product-item">
+            } catch (error) {
+                messageEl.textContent = "Sunucu bağlantı hatası.";
+            }
+        });
+
+        // Arama fonksiyonu ayrı tanımlanır
+        async function searchProducts() {
+            const searchInput = document.getElementById('searchText');
+            const text = searchInput.value.trim();
+            const container = document.getElementById('searchResults');
+            container.innerHTML = "";
+
+            if (!text) {
+                container.innerHTML = `<div class="alert alert-warning">Arama metni boş olamaz.</div>`;
+                return;
+            }
+
+            container.innerHTML = `<div class="text-center my-3">Aranıyor...</div>`;
+
+            try {
+                const res = await fetch(`${apiBase}/get-products-by-similarity?text=${encodeURIComponent(text)}`);
+                if (res.ok) {
+                    const results = await res.json();
+                    if (results.length === 0) {
+                        container.innerHTML = `<div class="alert alert-info">Benzer ürün bulunamadı.</div>`;
+                    } else {
+                        container.innerHTML = "<ul class='list-unstyled'>" + results.map(p =>
+                            `<li class="product-item">
                         <h5>${p.name} <small class="text-muted">- ${p.category} - ${p.price} TL</small></h5>
                         <p>${p.description}</p>
-                        <span class="similarity-score">Benzerlik Skoru: ${p.similarityScore.toFixed(3)}</span>
                     </li>`
-                ).join('') + "</ul>";
-            } else {
-                container.innerHTML = `<div class="alert alert-danger">Arama başarısız oldu.</div>`;
+                        ).join('') + "</ul>";
+                    }
+                } else {
+                    container.innerHTML = `<div class="alert alert-danger">Arama başarısız oldu.</div>`;
+                }
+            } catch (error) {
+                container.innerHTML = `<div class="alert alert-danger">Sunucu bağlantı hatası.</div>`;
+                console.error(error);
             }
-        } catch {
-            container.innerHTML = `<div class="alert alert-danger">Sunucu bağlantı hatası.</div>`;
+
+            // Arama sonrası input temizlenir
+            searchInput.value = "";
         }
-    });
-</script>
+
+        // Butona tıklayınca
+        document.getElementById('searchBtn').addEventListener('click', searchProducts);
+
+        // Enter tuşuna basınca
+        document.getElementById('searchText').addEventListener('keydown', function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                searchProducts();
+            }
+        });
+    </script>
 
 </body>
+
 </html>
